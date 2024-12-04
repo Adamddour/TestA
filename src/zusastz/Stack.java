@@ -12,7 +12,7 @@ public class Stack<T> {
         Knoten<T> neuerKnoten = new Knoten<>(element);
         neuerKnoten.naechster = oberster;
         oberster = neuerKnoten;
-        System.out.println("Hinzugefügt: " + element);
+
     }
 
     // Methode zum Entfernen eines Elements vom Stack
@@ -22,7 +22,7 @@ public class Stack<T> {
         }
         T entferntesElement = oberster.daten;
         oberster = oberster.naechster;
-        System.out.println("Entfernt: " + entferntesElement);
+
         return entferntesElement;
     }
 

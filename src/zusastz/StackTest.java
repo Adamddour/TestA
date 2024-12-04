@@ -28,7 +28,7 @@ public class StackTest {
         while (!stack.isEmpty()) {
             Integer entferntesElement = stack.pop();
             verbleibende.append(entferntesElement).append(" ");
-        }
+        }//
 
         // Verbleibende Elemente ausgeben
         System.out.println(verbleibende.toString().trim());
