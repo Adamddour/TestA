@@ -1,28 +1,12 @@
 package zusastz;
 
-public class Knoten {
-    private int daten;
-    private Knoten naechster;
+public class Knoten<T> {
+    T daten;          // Das im Knoten gespeicherte Daten-Element
+    Knoten<T> naechster;  // Zeiger auf den nächsten Knoten
 
-    public Knoten(int daten) {
+    // Konstruktor für den Knoten
+    public Knoten(T daten) {
         this.daten = daten;
         this.naechster = null;
     }
-
-    public int getDaten() {
-        return daten;
-    }
-
-    public void setDaten(int daten) {
-        this.daten = daten;
-    }
-
-    public Knoten getNaechster() {
-        return naechster;
-    }
-
-    public void setNaechster(Knoten naechster) {
-        this.naechster = naechster;
-    }
 }
-
