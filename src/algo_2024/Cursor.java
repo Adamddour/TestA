@@ -1,45 +1,42 @@
 package algo_2024;
 
-class Cursor {
-    private Queue leftQueue;
-    private Queue rightQueue;
+public class Cursor {
 
-    public Cursor() {
-        leftQueue = new Queue();
-        rightQueue = new Queue();
+    private QueueImp<Character> left;
+    private QueueImp<Character> right;
+
+    public Cursor(QueueImp<Character> left, QueueImp<Character> right) {
+        this.left = left;
+        this.right = right;
     }
 
-    // Bewegt den Cursor ein Zeichen nach links
     public void moveLeft() {
-        if (!leftQueue.isEmpty()) {
-            rightQueue.enqueue(leftQueue.dequeue());
+        if (!left.isEmpty()) {
+            right.enqueue(left.front());
+            left.dequeue();
+        } else {
+            throw new IllegalStateException("No elements on the left to move.");
         }
     }
 
-    // Bewegt den Cursor ein Zeichen nach rechts
     public void moveRight() {
-        if (!rightQueue.isEmpty()) {
-            leftQueue.enqueue(rightQueue.dequeue());
+        if (!right.isEmpty()) {
+            left.enqueue(right.front());
+            right.dequeue();
+        } else {
+            throw new IllegalStateException("No elements on the right to move.");
         }
     }
 
-    // Löscht das Zeichen links vom Cursor
     public void delete() {
-        leftQueue.dequeue();
+        if (!left.isEmpty()) {
+            left.dequeue();
+        } else {
+            throw new IllegalStateException("No elements to delete on the left.");
+        }
     }
 
-    // Fügt ein Zeichen links vom Cursor ein
     public void type(char c) {
-        leftQueue.enqueue(c);
-    }
-
-    // Gibt den Inhalt der linken Queue zurück
-    public String getLeftContent() {
-        return leftQueue.getContent();
-    }
-
-    // Gibt den Inhalt der rechten Queue zurück
-    public String getRightContent() {
-        return rightQueue.getContent();
+        left.enqueue(c);
     }
 }
