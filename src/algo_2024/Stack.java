@@ -1,40 +1,57 @@
 package algo_2024;
 
-public class Stack<T> { // Make the Stack class generic
-    private Knoten<T> top; // Use Knoten<T> for the type of top
+class Queue {
+    private Knoten front;
+    private Knoten rear;
 
-    // Constructor to initialize the stack
-    public Stack() {
-        this.top = null;
+    public Queue() {
+        this.front = null;
+        this.rear = null;
     }
 
-    // Method to push data onto the stack
-    public void push(T data) {
-        Knoten<T> newNode = new Knoten<>(data); // Create a new node with the data
-        newNode.setNext(top); // Set the next of the new node to the current top
-        top = newNode; // Update the top to the new node
-    }
-
-    // Method to pop data from the stack
-    public T pop() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Der Stack ist leer!"); // Error if the stack is empty
+    // Fügt ein Element hinten ein
+    public void enqueue(char data) {
+        Knoten newNode = new Knoten(data);
+        if (rear != null) {
+            rear.next = newNode;
         }
-        T data = top.getData(); // Get the data of the top node
-        top = top.getNext(); // Set the new top to the next node
-        return data; // Return the popped data
-    }
-
-    // Method to get the top data without removing it
-    public T top() {
-        if (isEmpty()) {
-            throw new IllegalStateException("Der Stack ist leer!"); // Error if the stack is empty
+        rear = newNode;
+        if (front == null) {
+            front = rear;
         }
-        return top.getData(); // Return the data of the top node
     }
 
-    // Method to check if the stack is empty
+    // Entfernt das vorderste Element
+    public char dequeue() {
+        if (isEmpty()) {
+            return '\0'; // '\0' steht für null-char
+        }
+        char data = front.data;
+        front = front.next;
+        if (front == null) {
+            rear = null;
+        }
+        return data;
+    }
+
+    // Gibt das vorderste Element zurück, ohne es zu entfernen
+    public char front() {
+        return isEmpty() ? '\0' : front.data;
+    }
+
+    // Prüft, ob die Queue leer ist
     public boolean isEmpty() {
-        return top == null; // The stack is empty if top is null
+        return front == null;
+    }
+
+    // Gibt den gesamten Inhalt der Queue als String zurück (Hilfsfunktion)
+    public String getContent() {
+        StringBuilder content = new StringBuilder();
+        Knoten current = front;
+        while (current != null) {
+            content.append(current.data);
+            current = current.next;
+        }
+        return content.toString();
     }
 }
